@@ -4,7 +4,7 @@
  * Laravel - A PHP Framework For Web Artisans
  *
  * @package  Laravel
- * @author   Seyfullah SEPET <taylor@laravel.com>
+ * @author   Seyfullah SEPET <seyfullah@laravel.com>
  */
 
 define('LARAVEL_START', microtime(true));
