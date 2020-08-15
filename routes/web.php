@@ -3,7 +3,7 @@
  * File name: web.php
  * Last modified: 2020.06.07 at 07:02:57
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
- * Copyright (c) 2020
+ * Copyright (c) 2020sxax<x
  *
  */
 
