@@ -657,7 +657,7 @@ return [
     'notification_read_help' => 'Insert Read',
     'notification_read_placeholder' => 'Insert Read',
     'notification_status_changed_description' => 'Your order #:order_id was :order_status tap to tracking your order',
-    'notification_status_changed_title' => 'Order status changed',
+    'notification_status_changed_title' => 'Sipariş durumu değişti',
     'notification_table' => 'Notifications List',
     'notification_title' => 'Title',
     'notification_title_help' => 'Insert Title',
@@ -666,7 +666,7 @@ return [
     'notification_user_id' => 'Kullanıcı Id',
     'notification_user_id_help' => 'Kullanıcı Ekle Id',
     'notification_user_id_placeholder' => 'Kullanıcı Ekle Id',
-    'notification_your_order' => 'Your order #:order_id is :order_status',
+    'notification_your_order' => '#:order_id numaralı :order_status',
 	
     'number' => 'Numara',
     'ok' => 'Tamam',
