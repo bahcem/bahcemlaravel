@@ -22,7 +22,7 @@
   
     {!! Form::label('delivery_address', 'Ayrıntılı adres', ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
-    <p>{!! $order->extra_address ? $order->deliveryAddress->extra_address : '' !!}</p>
+    <p>{!! $order->extra_address ? $order->extra_address->extra_address : '' !!}</p>
   </div>
 
     {!! Form::label('order_date', trans('lang.order_date'), ['class' => 'col-4 control-label']) !!}
