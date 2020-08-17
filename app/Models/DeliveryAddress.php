@@ -27,6 +27,7 @@ class DeliveryAddress extends Model
     public $fillable = [
         'description',
         'address',
+		'extra_address',
         'latitude',
         'longitude',
         'is_default',
@@ -41,6 +42,7 @@ class DeliveryAddress extends Model
     protected $casts = [
         'description' => 'string',
         'address' => 'string',
+		 'extra_address' => 'string',
         'latitude' => 'double',
         'longitude' => 'double',
         'is_default' => 'boolean',
