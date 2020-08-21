@@ -19,6 +19,7 @@
   {!! Form::label('address', 'Address:', ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
     <p>{!! $deliveryAddress->address !!}</p>
+	 <p>{!! $deliveryAddress->extra_address !!}</p>
   </div>
 </div>
 
