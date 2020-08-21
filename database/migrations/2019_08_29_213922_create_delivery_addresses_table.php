@@ -19,6 +19,7 @@ class CreateDeliveryAddressesTable extends Migration
             $table->increments('id');
             $table->string('description', 255)->nullable();
             $table->string('address', 255)->nullable();
+			$table->string('extra_address', 255)->nullable();
             $table->string('latitude', 24)->nullable();
             $table->string('longitude', 24)->nullable();
             $table->boolean('is_default')->nullable();
