@@ -24,7 +24,7 @@
 
 <!-- Extra Address Field -->
 <div class="form-group row col-6">
-  {!! Form::label('extra_address', 'Address:', ['class' => 'col-3 control-label text-right']) !!}
+  {!! Form::label('extra_address', 'Ayrıntılı:', ['class' => 'col-3 control-label text-right']) !!}
   <div class="col-9">
     <p>{!! $deliveryAddress->extra_address !!}</p>
   </div>
