@@ -6,15 +6,15 @@
   "sInfoPostFix":    "",
   "sInfoThousands":  ",",
   "sLengthMenu":     "Show _MENU_ entries",
-  "sLoadingRecords": "Loading...",
-  "sProcessing":     "Processing...",
-  "sSearch":         "Search:",
-  "sZeroRecords":    "No matching records found",
+  "sLoadingRecords": "Yükleniyor...",
+  "sProcessing":     "İşleniyor...",
+  "sSearch":         "Ara:",
+  "sZeroRecords":    "Eşleşen kayıt bulunamadı",
   "oPaginate": {
-    "sFirst":    "First",
-    "sLast":     "Last",
-    "sNext":     "Next",
-    "sPrevious": "Previous"
+    "sFirst":    "İlk",
+    "sLast":     "Son",
+    "sNext":     "Sonraki",
+    "sPrevious": "Önceki"
   },
   "oAria": {
     "sSortAscending":  ": activate to sort column ascending",
