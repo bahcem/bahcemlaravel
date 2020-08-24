@@ -1037,6 +1037,7 @@ return [
 	'market_delivery_time' => 'Teslim süresi',
 	'market_delivery_time_help' => 'Teslim süresini giriniz',
 	'market_delivery_time_placeholder' => 'Teslim süresini giriniz',
+	'Notifications_StatusChangedOrder' => 'Sipariş durumu değişti',
 	
     'cash' => 'Nakit'
 	
