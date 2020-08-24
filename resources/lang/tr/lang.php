@@ -1034,5 +1034,8 @@ return [
     'market_closed' => 'Marketi kapat',
     'option_group_updated_at' => 'G. Tarihi',
     'bank' => 'Banka',
+	'market_delivery_time' => 'Teslim süresi',
+	
     'cash' => 'Nakit'
+	
 ];
