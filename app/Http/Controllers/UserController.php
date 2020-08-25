@@ -282,7 +282,8 @@ class UserController extends Controller
 
         Flash::success('User updated successfully.');
 
-       return redirect()->back();
+       //return redirect()->back();
+	   return redirect(route('users.index'));
 
     }
 
