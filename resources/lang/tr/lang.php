@@ -866,7 +866,7 @@ return [
     'select_please' => 'Seç lütfen ...',
     'selects' => 'Çoklu Seçim',
     'setting' => 'Ayarlar',
-    'setting_desc' => '/ Ayarlar Yönetimi',
+    'setting_desc' => '| Ayarlar Yönetimi',
     'sync_translation' => 'Sync Translations',
     'text' => 'Text',
     'textarea' => 'Textarea',
