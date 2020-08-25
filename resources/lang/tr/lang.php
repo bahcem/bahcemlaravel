@@ -1008,7 +1008,7 @@ return [
     'market_fields_help' => 'Market türlerini seçiniz',
     'option_group_desc' => 'Açıklama',
     'option_group_create' => 'Seçenek Grubu Oluştur',
-    'option_group_table' => 'Grup Seçeneklerinin Listesi',
+    'option_group_table' => 'Seçenek Grubu Listesi',
     'option_group_edit' => 'Grup Seçeneği Düzenle',
     'option_group_name' => 'Grubun adı',
     'option_group_name_placeholder' => 'Renk',
