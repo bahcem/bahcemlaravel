@@ -282,7 +282,7 @@ class UserController extends Controller
 
         Flash::success('User updated successfully.');
 
-        return redirect(route('users.profile'));
+        return redirect(route('users.edit'));
 
     }
 
