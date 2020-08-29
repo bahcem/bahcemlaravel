@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('uploads/store', 'UploadController@store')->name('medias.create');
     Route::get('users/profile', 'UserController@profile')->name('users.profile');
-    Route::post('users/remove-media', 'UserController@removeMedia');
+    Route::post('settings/users/remove-media', 'UserController@removeMedia');
     Route::resource('users', 'UserController');
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 

@@ -271,4 +271,7 @@ class MarketController extends Controller
             Log::error($e->getMessage());
         }
     }
+	
+	
+	
 }
