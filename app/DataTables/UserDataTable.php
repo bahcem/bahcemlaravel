@@ -32,7 +32,7 @@ class UserDataTable extends DataTable
             ->editColumn('role', function ($user) {
                 return getArrayColumn($user->roles,'name');
             })
-			->editColumn('role', function ($user) {
+			->editColumn('email', function ($user) {
                 return getArrayColumn($user->roles,'phone');
             })
             ->editColumn('email', function ($user) {
