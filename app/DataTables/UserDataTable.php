@@ -33,7 +33,7 @@ class UserDataTable extends DataTable
                 return getArrayColumn($user->roles,'name');
             })
 			->editColumn('phone', function ($user) {
-                return getArrayColumn($user,'phone');
+                return getPhoneColumn($user,'phone');
             })
             ->editColumn('email', function ($user) {
                 return getEmailColumn($user, 'email');
@@ -99,6 +99,11 @@ class UserDataTable extends DataTable
             [
                 'data' => 'email',
                 'title' => trans('lang.user_email'),
+
+            ],
+			 [
+                'data' => 'phone',
+                'title' => trans('lang.user_phone'),
 
             ],
             [
