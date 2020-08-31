@@ -129,7 +129,7 @@ class User extends Authenticatable implements HasMedia
                 return asset(config('medialibrary.icons_folder') . '/' . $extension . '.png');
             }
         }else{
-            return asset('public/images/avatar_default.png');
+            return asset('images/avatar_default.png');
         }
     }
 
