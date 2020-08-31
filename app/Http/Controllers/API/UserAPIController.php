@@ -71,11 +71,13 @@ class UserAPIController extends Controller
         try {
             $this->validate($request, [
                 'name' => 'required',
+				 'phone' => 'required',
                 'email' => 'required|unique:users|email',
                 'password' => 'required',
             ]);
             $user = new User;
             $user->name = $request->input('name');
+			 $user->email = $request->input('phone');
             $user->email = $request->input('email');
             $user->device_token = $request->input('device_token', '');
             $user->password = Hash::make($request->input('password'));
