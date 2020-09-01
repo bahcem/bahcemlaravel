@@ -1039,7 +1039,6 @@ return [
 	'market_delivery_time_placeholder' => 'Teslim süresini giriniz',
 	'Notifications_StatusChangedOrder' => 'Sipariş durumu değişti',
 	
-    'cash' => 'Nakit'
 	 'coupon' => 'Coupon',
     'coupon_plural' => 'Coupons',
     'coupon_desc' => 'Coupons Management',
@@ -1071,5 +1070,8 @@ return [
     'coupon_product_id_help' => 'The coupon will applied on selected products',
     'coupon_category_id' => 'Categories',
     'coupon_category_id_help' => 'The coupon will applied on selected categories',
+	
+    'cash' => 'Nakit'
+	
 	
 ];
