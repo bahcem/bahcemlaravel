@@ -1070,6 +1070,7 @@ return [
     'coupon_product_id_help' => 'The coupon will applied on selected products',
     'coupon_category_id' => 'Kategoriler',
     'coupon_category_id_help' => 'The coupon will applied on selected categories',
+	'requested_markets_plural' => 'Market İstekleri',
 	
     'cash' => 'Nakit'
 	
