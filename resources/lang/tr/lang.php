@@ -1050,7 +1050,7 @@ return [
     'coupon_code_placeholder' => 'BAHCEM',
     'coupon_discount' => 'İndirim',
     'coupon_discount_help' => 'Insert Discount <b>Fixed</b> Amount (Ex: 8 for 8$) or <b>Percent</b> (Ex: 10 for 10%)',
-    'coupon_discount_placeholder' => '1',
+    'coupon_discount_placeholder' => '2',
     'coupon_discount_type' => 'İndirim Tipi',
     'coupon_percent' => 'Yüzde',
     'coupon_fixed' => 'Sabit',
