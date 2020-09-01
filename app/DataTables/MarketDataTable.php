@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: MarketDataTable.php
- * Last modified: 2020.04.30 at 07:09:04
+ * Last modified: 2020.04.30 at 08:21:09
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -45,6 +45,9 @@ class MarketDataTable extends DataTable
             })
             ->editColumn('available_for_delivery', function ($product) {
                 return getBooleanColumn($product, 'available_for_delivery');
+            })
+            ->editColumn('active', function ($market) {
+                return getBooleanColumn($market, 'active');
             })
             ->addColumn('action', 'markets.datatables_actions')
             ->rawColumns(array_merge($columns, ['action']));
@@ -97,7 +100,7 @@ class MarketDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(
@@ -148,6 +151,11 @@ class MarketDataTable extends DataTable
             [
                 'data' => 'closed',
                 'title' => trans('lang.market_closed'),
+
+            ],
+            [
+                'data' => 'active',
+                'title' => trans('lang.market_active'),
 
             ],
             [

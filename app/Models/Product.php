@@ -22,6 +22,7 @@ use Spatie\MediaLibrary\Models\Media;
  *
  * @property \App\Models\Market market
  * @property \App\Models\Category category
+ * @property \Illuminate\Database\Eloquent\Collection[] discountables
  * @property \Illuminate\Database\Eloquent\Collection Option
  * @property \Illuminate\Database\Eloquent\Collection Nutrition
  * @property \Illuminate\Database\Eloquent\Collection ProductsReview
@@ -217,6 +218,29 @@ class Product extends Model implements HasMedia
     {
         return $this->discount_price > 0 ? $this->discount_price : $this->price;
     }
+
+    /**
+     * @return float
+     */
+    public function applyCoupon($coupon): float
+    {
+        $price = $this->getPrice();
+        if(isset($coupon) && count($this->discountables) + count($this->category->discountables) + count($this->market->discountables) > 0){
+            if ($coupon->discount_type == 'fixed') {
+                $price -= $coupon->discount;
+            } else {
+                $price = $price - ($price * $coupon->discount / 100);
+            }
+            if ($price < 0) $price = 0;
+        }
+        return $price;
+    }
+
+    public function discountables()
+    {
+        return $this->morphMany('App\Models\Discountable', 'discountable');
+    }
+
 
 
 }

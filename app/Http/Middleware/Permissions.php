@@ -1,4 +1,13 @@
-<?php namespace App\Http\Middleware;
+<?php
+/**
+ * File name: Permissions.php
+ * Last modified: 2020.06.07 at 07:02:57
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
+
+namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +41,9 @@ class Permissions
     {
         $permission = $request->route()->getName();
         if ($this->match($request->route()) && auth()->user()->canNot($permission)) {
+            if ($permission == 'dashboard') {
+                return redirect(route('users.profile'));
+            }
             throw new UnauthorizedException(403, trans('error.permission') . ' <b>' . $permission . '</b>');
         }
 

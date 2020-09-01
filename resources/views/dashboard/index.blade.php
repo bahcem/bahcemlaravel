@@ -96,7 +96,7 @@
                 <div class="card">
                     <div class="card-header no-border">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Earnings</h3>
+                            <h3 class="card-title">{{trans('lang.earning_plural')}}</h3>
                             <a href="{!! route('payments.index') !!}">{{trans('lang.dashboard_view_all_payments')}}</a>
                         </div>
                     </div>

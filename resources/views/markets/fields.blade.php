@@ -13,6 +13,15 @@
         </div>
     </div>
 
+    <!-- fields Field -->
+    <div class="form-group row ">
+        {!! Form::label('fields[]', trans("lang.market_fields"),['class' => 'col-3 control-label text-right']) !!}
+        <div class="col-9">
+            {!! Form::select('fields[]', $field, $fieldsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
+            <div class="form-text text-muted">{{ trans("lang.market_fields_help") }}</div>
+        </div>
+    </div>
+
     @hasanyrole('admin|manager')
     <!-- Users Field -->
     <div class="form-group row ">
@@ -228,15 +237,6 @@
                 <div class="form-text text-muted">{{ trans("lang.market_users_help") }}</div>
             </div>
         </div>
-
-        <!-- fields Field -->
-        <div class="form-group row ">
-            {!! Form::label('fields[]', trans("lang.market_fields"),['class' => 'col-3 control-label text-right']) !!}
-            <div class="col-9">
-                {!! Form::select('fields[]', $field, $fieldsSelected, ['class' => 'select2 form-control' , 'multiple'=>'multiple']) !!}
-                <div class="form-text text-muted">{{ trans("lang.market_fields_help") }}</div>
-            </div>
-        </div>
         
     </div>
     <div style="flex: 50%;max-width: 50%;padding: 0 4px;" class="column">
@@ -248,6 +248,15 @@
                 <div class="form-text text-muted">
                     {{ trans("lang.market_admin_commission_help") }}
                 </div>
+            </div>
+        </div>
+        <div class="form-group row ">
+            {!! Form::label('active', trans("lang.market_active"),['class' => 'col-3 control-label text-right']) !!}
+            <div class="checkbox icheck">
+                <label class="col-9 ml-2 form-check-inline">
+                    {!! Form::hidden('active', 0) !!}
+                    {!! Form::checkbox('active', 1, null) !!}
+                </label>
             </div>
         </div>
     </div>

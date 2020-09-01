@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: OptionDataTable.php
- * Last modified: 2020.04.29 at 11:42:25
+ * Last modified: 2020.04.30 at 08:21:09
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -148,7 +148,7 @@ class OptionDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

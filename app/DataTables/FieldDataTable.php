@@ -1,12 +1,19 @@
 <?php
+/**
+ * File name: FieldDataTable.php
+ * Last modified: 2020.05.04 at 09:04:18
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\DataTables;
 
-use App\Models\Field;
 use App\Models\CustomField;
-use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
+use App\Models\Field;
 use Barryvdh\DomPDF\Facade as PDF;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class FieldDataTable extends DataTable
 {
@@ -60,7 +67,7 @@ class FieldDataTable extends DataTable
                 'title' => trans('lang.field_image'),
                 'searchable' => false, 'orderable' => false, 'exportable' => false, 'printable' => false,
             ],
-            (auth()->check() && auth()->user()->hasAnyRole(['admin','manager'])) ? [
+            (auth()->check() && auth()->user()->hasAnyRole(['admin', 'manager'])) ? [
                 'data' => 'markets',
                 'title' => trans('lang.field_markets'),
                 'searchable' => false,
@@ -110,7 +117,7 @@ class FieldDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: ProductController.php
- * Last modified: 2020.04.29 at 18:37:35
+ * Last modified: 2020.04.30 at 08:21:08
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -82,7 +82,7 @@ class ProductController extends Controller
         if (auth()->user()->hasRole('admin')) {
             $market = $this->marketRepository->pluck('name', 'id');
         } else {
-            $market = $this->marketRepository->myMarkets()->pluck('name', 'id');
+            $market = $this->marketRepository->myActiveMarkets()->pluck('name', 'id');
         }
         $hasCustomField = in_array($this->productRepository->model(), setting('custom_field_models', []));
         if ($hasCustomField) {

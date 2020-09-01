@@ -1,4 +1,11 @@
 <?php
+/**
+ * File name: TrendingWeekCriteria.php
+ * Last modified: 2020.05.04 at 09:04:18
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Criteria\Products;
 
@@ -49,17 +56,20 @@ class TrendingWeekCriteria implements CriteriaInterface
             POW(69.1 * (markets.latitude - $myLat), 2) +
             POW(69.1 * ($myLon - markets.longitude) * COS(markets.latitude / 57.3), 2)) AS distance, SQRT(
             POW(69.1 * (markets.latitude - $areaLat), 2) +
-            POW(69.1 * ($areaLon - markets.longitude) * COS(markets.latitude / 57.3), 2)) AS area, count(products.id) as product_count"),'products.*')
+            POW(69.1 * ($areaLon - markets.longitude) * COS(markets.latitude / 57.3), 2)) AS area, count(products.id) as product_count"), 'products.*')
                 ->join('product_orders', 'products.id', '=', 'product_orders.product_id')
                 ->whereBetween('product_orders.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
-                ->orderBy('product_count','desc')
+                ->where('markets.active','1')
+                ->orderBy('product_count', 'desc')
                 ->orderBy('area')
                 ->groupBy('products.id');
         } else {
             return $model->join('product_orders', 'products.id', '=', 'product_orders.product_id')
+                ->join('markets', 'markets.id', '=', 'products.market_id')
                 ->whereBetween('product_orders.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])
+                ->where('markets.active','1')
                 ->groupBy('products.id')
-                ->orderBy('product_count','desc')
+                ->orderBy('product_count', 'desc')
                 ->select('products.*', DB::raw('count(products.id) as product_count'));
         }
     }

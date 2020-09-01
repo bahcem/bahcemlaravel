@@ -37,6 +37,7 @@ return [
             'JSON',
             'cURL',
             'exif',
+            'fileinfo'
         ],
         'apache' => [
             'mod_rewrite',
@@ -151,6 +152,6 @@ return [
     */
     'updaterEnabled' => 'true',
 
-    'currentVersion' => 'v150',
+    'currentVersion' => 'v170',
 
 ];

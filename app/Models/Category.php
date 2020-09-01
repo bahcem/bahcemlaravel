@@ -1,4 +1,11 @@
 <?php
+/**
+ * File name: Category.php
+ * Last modified: 2020.05.02 at 08:39:42
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Models;
 
@@ -14,6 +21,7 @@ use Spatie\MediaLibrary\Models\Media;
  * @version April 11, 2020, 1:57 pm UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection Product
+ * @property \Illuminate\Database\Eloquent\Collection[] discountables
  * @property string name
  * @property string description
  */
@@ -25,6 +33,11 @@ class Category extends Model implements HasMedia
 
     public $table = 'categories';
     
+
+    public function discountables()
+    {
+        return $this->morphMany('App\Models\Discountable', 'discountable');
+    }
 
 
     public $fillable = [

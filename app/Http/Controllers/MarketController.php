@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: MarketController.php
- * Last modified: 2020.04.29 at 18:37:10
+ * Last modified: 2020.04.30 at 08:21:08
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -10,9 +10,13 @@
 namespace App\Http\Controllers;
 
 use App\Criteria\Markets\MarketsOfUserCriteria;
+use App\Criteria\Users\AdminsCriteria;
+use App\Criteria\Users\ClientsCriteria;
 use App\Criteria\Users\DriversCriteria;
+use App\Criteria\Users\ManagersClientsCriteria;
 use App\Criteria\Users\ManagersCriteria;
 use App\DataTables\MarketDataTable;
+use App\DataTables\RequestedMarketDataTable;
 use App\Events\MarketChangedEvent;
 use App\Http\Requests\CreateMarketRequest;
 use App\Http\Requests\UpdateMarketRequest;
@@ -72,6 +76,17 @@ class MarketController extends Controller
     }
 
     /**
+     * Display a listing of the Market.
+     *
+     * @param MarketDataTable $marketDataTable
+     * @return Response
+     */
+    public function requestedMarkets(RequestedMarketDataTable $requestedMarketDataTable)
+    {
+        return $requestedMarketDataTable->render('markets.requested');
+    }
+
+    /**
      * Show the form for creating a new Market.
      *
      * @return Response
@@ -103,7 +118,7 @@ class MarketController extends Controller
     public function store(CreateMarketRequest $request)
     {
         $input = $request->all();
-        if (auth()->user()->hasRole('manager')) {
+        if (auth()->user()->hasRole(['manager','client'])) {
             $input['users'] = [auth()->id()];
         }
         $customFields = $this->customFieldRepository->findByField('custom_field_model', $this->marketRepository->model());
@@ -115,7 +130,7 @@ class MarketController extends Controller
                 $mediaItem = $cacheUpload->getMedia('image')->first();
                 $mediaItem->copy($market, 'image');
             }
-            event(new MarketChangedEvent($market));
+            event(new MarketChangedEvent($market, $market));
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
@@ -164,8 +179,12 @@ class MarketController extends Controller
             Flash::error(__('lang.not_found', ['operator' => __('lang.market')]));
             return redirect(route('markets.index'));
         }
-
-        $user = $this->userRepository->getByCriteria(new ManagersCriteria())->pluck('name', 'id');
+        if($market['active'] == 0){
+            $user = $this->userRepository->getByCriteria(new ManagersClientsCriteria())->pluck('name', 'id');
+        } else {
+            $user = $this->userRepository->getByCriteria(new ManagersCriteria())->pluck('name', 'id');
+        }
+        //$user = $market->users();
         $drivers = $this->userRepository->getByCriteria(new DriversCriteria())->pluck('name', 'id');
         $field = $this->fieldRepository->pluck('name', 'id');
 
@@ -196,9 +215,9 @@ class MarketController extends Controller
     public function update($id, UpdateMarketRequest $request)
     {
         $this->marketRepository->pushCriteria(new MarketsOfUserCriteria(auth()->id()));
-        $market = $this->marketRepository->findWithoutFail($id);
+        $oldMarket = $this->marketRepository->findWithoutFail($id);
 
-        if (empty($market)) {
+        if (empty($oldMarket)) {
             Flash::error('Market not found');
             return redirect(route('markets.index'));
         }
@@ -216,7 +235,7 @@ class MarketController extends Controller
                 $market->customFieldsValues()
                     ->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
             }
-            event(new MarketChangedEvent($market));
+            event(new MarketChangedEvent($market, $oldMarket));
         } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
@@ -271,7 +290,4 @@ class MarketController extends Controller
             Log::error($e->getMessage());
         }
     }
-	
-	
-	
 }

@@ -1,4 +1,11 @@
 <?php
+/**
+ * File name: NearCriteria.php
+ * Last modified: 2020.05.05 at 14:07:16
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Criteria\Products;
 
@@ -50,10 +57,16 @@ class NearCriteria implements CriteriaInterface
             POW(69.1 * ($myLon - markets.longitude) * COS(markets.latitude / 57.3), 2)) AS distance, SQRT(
             POW(69.1 * (markets.latitude - $areaLat), 2) +
             POW(69.1 * ($areaLon - markets.longitude) * COS(markets.latitude / 57.3), 2)) AS area"), "products.*")
+                ->groupBy("products.id")
+                ->where('markets.active','1')
                 ->orderBy('closed')
                 ->orderBy('area');
         } else {
-            return $model->join('markets', 'markets.id', '=', 'products.market_id')->select("products.*")->orderBy('markets.closed');
+            return $model->join('markets', 'markets.id', '=', 'products.market_id')
+                ->groupBy("products.id")
+                ->where('markets.active','1')
+                ->select("products.*")
+                ->orderBy('markets.closed');
         }
     }
 }

@@ -10,6 +10,8 @@
 namespace App\Http\Controllers\API;
 
 
+use App\Criteria\Orders\OrdersOfStatusesCriteria;
+use App\Criteria\Orders\OrdersOfUserCriteria;
 use App\Events\OrderChangedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -82,8 +84,10 @@ class OrderAPIController extends Controller
         try {
             $this->orderRepository->pushCriteria(new RequestCriteria($request));
             $this->orderRepository->pushCriteria(new LimitOffsetCriteria($request));
+            $this->orderRepository->pushCriteria(new OrdersOfStatusesCriteria($request));
+            $this->orderRepository->pushCriteria(new OrdersOfUserCriteria(auth()->id()));
         } catch (RepositoryException $e) {
-            Flash::error($e->getMessage());
+            return $this->sendError($e->getMessage());
         }
         $orders = $this->orderRepository->all();
 
@@ -106,7 +110,7 @@ class OrderAPIController extends Controller
                 $this->orderRepository->pushCriteria(new RequestCriteria($request));
                 $this->orderRepository->pushCriteria(new LimitOffsetCriteria($request));
             } catch (RepositoryException $e) {
-                Flash::error($e->getMessage());
+                return $this->sendError($e->getMessage());
             }
             $order = $this->orderRepository->findWithoutFail($id);
         }

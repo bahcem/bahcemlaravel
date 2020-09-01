@@ -1,8 +1,16 @@
 <?php
+/**
+ * File name: MarketAPIController.php
+ * Last modified: 2020.05.04 at 09:04:19
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Http\Controllers\API;
 
 
+use App\Criteria\Markets\ActiveCriteria;
 use App\Criteria\Markets\MarketsOfFieldsCriteria;
 use App\Criteria\Markets\NearCriteria;
 use App\Criteria\Markets\PopularCriteria;
@@ -63,9 +71,10 @@ class MarketAPIController extends Controller
             $this->marketRepository->pushCriteria(new MarketsOfFieldsCriteria($request));
             if ($request->has('popular')) {
                 $this->marketRepository->pushCriteria(new PopularCriteria($request));
-            }else{
+            } else {
                 $this->marketRepository->pushCriteria(new NearCriteria($request));
             }
+            $this->marketRepository->pushCriteria(new ActiveCriteria());
             $markets = $this->marketRepository->all();
 
         } catch (RepositoryException $e) {

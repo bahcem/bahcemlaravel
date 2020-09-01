@@ -11,17 +11,20 @@ class MarketChangedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $market;
+    public $newMarket;
+
+    public $oldMarket;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Market $market)
+    public function __construct(Market $newMarket, Market $oldMarket)
     {
         //
-        $this->market = $market;
+        $this->newMarket = $newMarket;
+        $this->oldMarket = $oldMarket;
     }
 
 }

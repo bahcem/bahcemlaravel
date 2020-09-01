@@ -1,15 +1,22 @@
 <?php
+/**
+ * File name: ProductReviewDataTable.php
+ * Last modified: 2020.05.04 at 09:04:19
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\DataTables;
 
 use App\Criteria\ProductReviews\OrderProductReviewsOfUserCriteria;
 use App\Criteria\ProductReviews\ProductReviewsOfUserCriteria;
-use App\Models\ProductReview;
 use App\Models\CustomField;
+use App\Models\ProductReview;
 use App\Repositories\ProductReviewRepository;
-use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\EloquentDataTable;
 use Barryvdh\DomPDF\Facade as PDF;
+use Yajra\DataTables\EloquentDataTable;
+use Yajra\DataTables\Services\DataTable;
 
 class ProductReviewDataTable extends DataTable
 {
@@ -43,8 +50,8 @@ class ProductReviewDataTable extends DataTable
             ->editColumn('updated_at', function ($product_review) {
                 return getDateColumn($product_review, 'updated_at');
             })
-            ->addColumn('action', function ($product_review){
-                return view('product_reviews.datatables_actions',['id'=>$product_review->id,'myReviews'=>$this->myReviews])->render();
+            ->addColumn('action', function ($product_review) {
+                return view('product_reviews.datatables_actions', ['id' => $product_review->id, 'myReviews' => $this->myReviews])->render();
             })
             ->rawColumns(array_merge($columns, ['action']));
 
@@ -61,7 +68,7 @@ class ProductReviewDataTable extends DataTable
     public function query(ProductReview $model)
     {
         $this->productReviewRepo->resetCriteria();
-        $this->productReviewRepo->pushCriteria( new OrderProductReviewsOfUserCriteria(auth()->id()));
+        $this->productReviewRepo->pushCriteria(new OrderProductReviewsOfUserCriteria(auth()->id()));
         return $this->productReviewRepo->with("user")->with("product")->newQuery();
     }
 
@@ -75,7 +82,7 @@ class ProductReviewDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

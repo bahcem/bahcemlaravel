@@ -8,18 +8,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Invoice;
-use App\IPNStatus;
-use App\Item;
 use App\Models\Payment;
-use App\Models\User;
-use App\Notifications\NewOrder;
-use App\Repositories\CartRepository;
-use App\Repositories\NotificationRepository;
-use App\Repositories\OrderRepository;
-use App\Repositories\PaymentRepository;
-use App\Repositories\ProductOrderRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
 
@@ -49,11 +38,13 @@ class PayPalController extends ParentOrderController
     public function getExpressCheckout(Request $request)
     {
         $user = $this->userRepository->findByField('api_token', $request->get('api_token'))->first();
-        $delivery_id = $request->get('delivery_address_id');
+        $coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
+        $deliveryId = $request->get('delivery_address_id');
         if (!empty($user)) {
             $this->order->user = $user;
             $this->order->user_id = $user->id;
-            $this->order->delivery_address_id = $delivery_id;
+            $this->order->delivery_address_id = $deliveryId;
+            $this->coupon = $coupon;
             $payPalCart = $this->getCheckoutData();
             try {
                 $response = $this->provider->setExpressCheckout($payPalCart);
@@ -87,6 +78,10 @@ class PayPalController extends ParentOrderController
         ];
         $data['total'] = $this->total;
         $data['return_url'] = url("payments/paypal/express-checkout-success?user_id=" . $this->order->user_id . "&delivery_address_id=" . $this->order->delivery_address_id);
+
+        if (isset($this->coupon)) {
+            $data['return_url'] .= "&coupon_code=" . $this->coupon->code;
+        }
         $data['cancel_url'] = url('payments/paypal');
         $data['invoice_id'] = $order_id . '_' . date("Y_m_d_h_i_sa");
         $data['invoice_description'] = $this->order->user->cart[0]->product->market->name;
@@ -109,6 +104,7 @@ class PayPalController extends ParentOrderController
         $PayerID = $request->get('PayerID');
         $this->order->user_id = $request->get('user_id', 0);
         $this->order->user = $this->userRepository->findWithoutFail($this->order->user_id);
+        $this->coupon = $this->couponRepository->findByField('code', $request->get('coupon_code'))->first();
         $this->order->delivery_address_id = $request->get('delivery_address_id', 0);
 
         // Verify Express Checkout Token
@@ -128,7 +124,7 @@ class PayPalController extends ParentOrderController
             return redirect(url('payments/paypal'));
         } else {
             Flash::error("Error processing PayPal payment for your order");
-            return redirect(url('payments.failed'));
+            return redirect(route('payments.failed'));
         }
     }
 }

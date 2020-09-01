@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: MarketReviewDataTable.php
- * Last modified: 2020.04.30 at 08:21:08
+ * Last modified: 2020.05.04 at 09:04:19
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -61,8 +61,8 @@ class MarketReviewDataTable extends DataTable
         $dataTable = $dataTable
             ->editColumn('updated_at', function ($market_review) {
                 return getDateColumn($market_review, 'updated_at');
-            })->addColumn('action', function ($market_review){
-                return view('market_reviews.datatables_actions',['id'=>$market_review->id,'myReviews'=>$this->myReviews])->render();
+            })->addColumn('action', function ($market_review) {
+                return view('market_reviews.datatables_actions', ['id' => $market_review->id, 'myReviews' => $this->myReviews])->render();
             })
             ->rawColumns(array_merge($columns, ['action']));
 
@@ -93,7 +93,7 @@ class MarketReviewDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

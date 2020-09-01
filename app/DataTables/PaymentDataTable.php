@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: PaymentDataTable.php
- * Last modified: 2020.04.28 at 23:02:40
+ * Last modified: 2020.05.04 at 09:04:19
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -67,7 +67,7 @@ class PaymentDataTable extends DataTable
                 ->groupBy('payments.id')
                 ->orderBy('payments.id', 'desc')
                 ->select('payments.*');
-        }else if(auth()->user()->hasRole('client')){
+        } else if (auth()->user()->hasRole('client')) {
             return $model->newQuery()->with("user")
                 ->where('payments.user_id', auth()->id())
                 ->select('payments.*')->orderBy('id', 'desc');
@@ -84,7 +84,7 @@ class PaymentDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

@@ -41,7 +41,7 @@ class DriverAPIController extends Controller
             $this->driverRepository->pushCriteria(new RequestCriteria($request));
             $this->driverRepository->pushCriteria(new LimitOffsetCriteria($request));
         } catch (RepositoryException $e) {
-            Flash::error($e->getMessage());
+            return $this->sendError($e->getMessage());
         }
         $drivers = $this->driverRepository->all();
 

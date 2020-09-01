@@ -3,7 +3,7 @@
  * File name: web.php
  * Last modified: 2020.06.07 at 07:02:57
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
- * Copyright (c) 2020sxax<x
+ * Copyright (c) 2020
  *
  */
 
@@ -24,7 +24,7 @@ Auth::routes();
 
 Route::get('payments/failed', 'PayPalController@index')->name('payments.failed');
 Route::get('payments/razorpay/checkout', 'RazorPayController@checkout');
-Route::post('payments/razorpay/pay-success/{userId}/{deliveryAddressId?}', 'RazorPayController@paySuccess');
+Route::post('payments/razorpay/pay-success/{userId}/{deliveryAddressId?}/{couponCode?}', 'RazorPayController@paySuccess');
 Route::get('payments/razorpay', 'RazorPayController@index');
 
 Route::get('payments/paypal/express-checkout', 'PayPalController@getExpressCheckout')->name('paypal.express-checkout');
@@ -32,14 +32,12 @@ Route::get('payments/paypal/express-checkout-success', 'PayPalController@getExpr
 Route::get('payments/paypal', 'PayPalController@index')->name('paypal.index');
 
 Route::get('firebase/sw-js','AppSettingController@initFirebase');
-Route::get('privacy-policy', function (){return view('landing.index');});
 
 
 Route::get('storage/app/public/{id}/{conversion}/{filename?}', 'UploadController@storage');
 Route::middleware('auth')->group(function () {
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
-    Route::get('/', 'UserController@profile')->name('users.profile');
-	// Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
 
     Route::post('uploads/store', 'UploadController@store')->name('medias.create');
     Route::get('users/profile', 'UserController@profile')->name('users.profile');
@@ -90,11 +88,12 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::post('markets/remove-media', 'MarketController@removeMedia');
+    Route::get('requestedMarkets', 'MarketController@requestedMarkets')->name('requestedMarkets.index'); //adeed
     Route::resource('markets', 'MarketController')->except([
         'show'
     ]);
 
-    Route::post('categories/remove-media', 'CategoryController@removeMedia');
+    Route::post('categories/remove-media', 'CategoryController@removeMedia'); 
     Route::resource('categories', 'CategoryController')->except([
         'show'
     ]);
@@ -153,7 +152,7 @@ Route::middleware('auth')->group(function () {
     ]);
 
     Route::resource('drivers', 'DriverController')->except([
-        'show','edit','update'
+        'show'
     ]);
 
     Route::resource('earnings', 'EarningController')->except([
@@ -175,6 +174,9 @@ Route::middleware('auth')->group(function () {
     Route::post('options/remove-media','OptionController@removeMedia');
 
     Route::resource('options', 'OptionController')->except([
+        'show'
+    ]);
+    Route::resource('coupons', 'CouponController')->except([
         'show'
     ]);
 });

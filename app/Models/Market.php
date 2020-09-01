@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: Market.php
- * Last modified: 2020.05.26 at 17:09:50
+ * Last modified: 2020.06.07 at 07:02:57
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -24,8 +24,9 @@ use Spatie\MediaLibrary\Models\Media;
  * @property \Illuminate\Database\Eloquent\Collection Product
  * @property \Illuminate\Database\Eloquent\Collection Gallery
  * @property \Illuminate\Database\Eloquent\Collection MarketsReview
+ * @property \Illuminate\Database\Eloquent\Collection[] discountables
  * @property \Illuminate\Database\Eloquent\Collection[] fields
- * @property \Illuminate\Database\Eloquent\Collection User
+ * @property \Illuminate\Database\Eloquent\Collection[] User
  * @property \Illuminate\Database\Eloquent\Collection[] Market
  * @property string name
  * @property string description
@@ -41,6 +42,7 @@ use Spatie\MediaLibrary\Models\Media;
  * @property double delivery_range
  * @property boolean available_for_delivery
  * @property boolean closed
+ * @property boolean active
  */
 class Market extends Model implements HasMedia
 {
@@ -50,6 +52,11 @@ class Market extends Model implements HasMedia
 
     public $table = 'markets';
     
+
+    public function discountables()
+    {
+        return $this->morphMany('App\Models\Discountable', 'discountable');
+    }
 
 
     public $fillable = [
@@ -66,7 +73,8 @@ class Market extends Model implements HasMedia
         'delivery_range',
         'available_for_delivery',
         'closed',
-        'information'
+        'information',
+        'active',
     ];
 
     /**
@@ -89,7 +97,8 @@ class Market extends Model implements HasMedia
         'delivery_range'=>'double',
         'available_for_delivery'=>'boolean',
         'closed'=>'boolean',
-        'information' => 'string'
+        'information' => 'string',
+        'active' =>'boolean'
     ];
 
     /**

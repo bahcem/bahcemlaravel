@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: ProductDataTable.php
- * Last modified: 2020.04.30 at 07:33:07
+ * Last modified: 2020.05.04 at 09:04:18
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -74,7 +74,7 @@ class ProductDataTable extends DataTable
                 ->join("user_markets", "user_markets.market_id", "=", "products.market_id")
                 ->where('user_markets.user_id', auth()->id())
                 ->groupBy('products.id')
-                ->select('products.*')->orderBy('products.updated_at','desc');
+                ->select('products.*')->orderBy('products.updated_at', 'desc');
         } else if (auth()->user()->hasRole('driver')) {
             return $model->newQuery()->with("market")->with("category")
                 ->join("driver_markets", "driver_markets.market_id", "=", "products.market_id")
@@ -101,7 +101,7 @@ class ProductDataTable extends DataTable
         return $this->builder()
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->addAction(['width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
+            ->addAction(['title'=>trans('lang.actions'),'width' => '80px', 'printable' => false, 'responsivePriority' => '100'])
             ->parameters(array_merge(
                 config('datatables-buttons.parameters'), [
                     'language' => json_decode(

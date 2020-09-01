@@ -27,6 +27,15 @@ Route::prefix('driver')->group(function () {
     Route::get('settings', 'API\Driver\UserAPIController@settings');
 });
 
+Route::prefix('manager')->group(function () {
+    Route::post('login', 'API\Manager\UserAPIController@login');
+    Route::post('register', 'API\Manager\UserAPIController@register');
+    Route::post('send_reset_link_email', 'API\UserAPIController@sendResetLinkEmail');
+    Route::get('user', 'API\Manager\UserAPIController@user');
+    Route::get('logout', 'API\Manager\UserAPIController@logout');
+    Route::get('settings', 'API\Manager\UserAPIController@settings');
+});
+
 
 Route::post('login', 'API\UserAPIController@login');
 Route::post('register', 'API\UserAPIController@register');
@@ -68,14 +77,10 @@ Route::middleware('auth:api')->group(function () {
     });
     Route::group(['middleware' => ['role:manager']], function () {
         Route::prefix('manager')->group(function () {
-            
-            Route::resource('drivers', 'API\DriverAPIController');
-
-            Route::resource('earnings', 'API\EarningAPIController');
-
-            Route::resource('driversPayouts', 'API\DriversPayoutAPIController');
-
-            Route::resource('marketsPayouts', 'API\MarketsPayoutAPIController');
+            Route::post('users/{id}', 'API\UserAPIController@update');
+            Route::get('users/drivers_of_market/{id}', 'API\Manager\UserAPIController@driversOfMarket');
+            Route::get('dashboard/{id}', 'API\DashboardAPIController@manager');
+            Route::resource('markets', 'API\Manager\MarketAPIController');
         });
     });
     Route::post('users/{id}', 'API\UserAPIController@update');
@@ -98,4 +103,16 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('carts', 'API\CartAPIController');
 
     Route::resource('delivery_addresses', 'API\DeliveryAddressAPIController');
+
+    Route::resource('drivers', 'API\DriverAPIController');
+
+    Route::resource('earnings', 'API\EarningAPIController');
+
+    Route::resource('driversPayouts', 'API\DriversPayoutAPIController');
+
+    Route::resource('marketsPayouts', 'API\MarketsPayoutAPIController');
+
+    Route::resource('coupons', 'API\CouponAPIController')->except([
+        'show'
+    ]);
 });

@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: 2019_08_29_213821_create_markets_table.php
- * Last modified: 2020.05.03 at 10:56:45
+ * Last modified: 2020.06.07 at 07:02:57
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -35,6 +35,7 @@ class CreateMarketsTable extends Migration
             $table->double('delivery_range', 8, 2)->nullable()->default(0);//added
             $table->double('default_tax', 8, 2)->nullable()->default(0); // //added
             $table->boolean('closed')->nullable()->default(0); // //added
+            $table->boolean('active')->nullable()->default(0); // //added
             $table->boolean('available_for_delivery')->nullable()->default(1); //added
             $table->timestamps();
         });

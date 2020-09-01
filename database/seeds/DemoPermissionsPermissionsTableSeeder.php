@@ -1,4 +1,11 @@
 <?php
+/**
+ * File name: DemoPermissionsPermissionsTableSeeder.php
+ * Last modified: 2020.05.04 at 09:04:19
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 use Illuminate\Database\Seeder;
 
@@ -12,7 +19,9 @@ class DemoPermissionsPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
+
+        \DB::table('role_has_permissions')->delete();
         \DB::table('permissions')->delete();
 
         \DB::table('permissions')->insert(array (
@@ -1535,6 +1544,15 @@ class DemoPermissionsPermissionsTableSeeder extends Seeder
                 'guard_name' => 'web',
                 'created_at' => '2020-04-11 15:04:40',
                 'updated_at' => '2020-04-11 15:04:40',
+                'deleted_at' => NULL,
+            ),
+            169 =>
+            array (
+                'id' => 176,
+                'name' => 'requestedMarkets.index',
+                'guard_name' => 'web',
+                'created_at' => '2020-08-13 14:58:02',
+                'updated_at' => '2020-08-13 14:58:02',
                 'deleted_at' => NULL,
             ),
         ));

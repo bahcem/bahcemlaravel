@@ -1,25 +1,30 @@
 <?php
+/**
+ * File name: CategoryAPIController.php
+ * Last modified: 2020.05.04 at 09:04:18
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Http\Controllers\API;
 
 
 use App\Criteria\Categories\CategoriesOfFieldsCriteria;
-use App\Criteria\Categories\HiddenCriteria;
+use App\Criteria\Categories\CategoriesOfMarketCriteria;
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
+use Flash;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Illuminate\Support\Facades\Response;
 use Prettus\Repository\Exceptions\RepositoryException;
-use Flash;
 
 /**
  * Class CategoryController
  * @package App\Http\Controllers\API
  */
-
 class CategoryAPIController extends Controller
 {
     /** @var  CategoryRepository */
@@ -43,8 +48,9 @@ class CategoryAPIController extends Controller
             $this->categoryRepository->pushCriteria(new RequestCriteria($request));
             $this->categoryRepository->pushCriteria(new LimitOffsetCriteria($request));
             $this->categoryRepository->pushCriteria(new CategoriesOfFieldsCriteria($request));
+            $this->categoryRepository->pushCriteria(new CategoriesOfMarketCriteria($request));
         } catch (RepositoryException $e) {
-            Flash::error($e->getMessage());
+            return $this->sendError($e->getMessage());
         }
         $categories = $this->categoryRepository->all();
 

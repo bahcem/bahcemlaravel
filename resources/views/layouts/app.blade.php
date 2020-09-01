@@ -21,7 +21,7 @@
 <!-- jvectormap -->
 {{--<link rel="stylesheet" href="{{asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css')}}">--}}
 <!-- Date Picker -->
-{{--<link rel="stylesheet" href="{{asset('plugins/datepicker/datepicker3.css')}}">--}}
+<link rel="stylesheet" href="{{asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}">
 <!-- Daterange picker -->
 {{--<link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css')}}">--}}
 {{--<!-- bootstrap wysihtml5 - text editor -->--}}
@@ -248,7 +248,7 @@
     {{--<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js')}}"></script>--}}
     {{--<script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>--}}
     <!-- datepicker -->
-    {{--<script src="{{asset('plugins/datepicker/bootstrap-datepicker.js')}}"></script>--}}
+    <script src="{{asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js')}}"></script>
     <!-- Bootstrap WYSIHTML5 -->
     {{--<script src="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>--}}
     <!-- Slimscroll -->

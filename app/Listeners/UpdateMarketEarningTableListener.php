@@ -31,7 +31,7 @@ class UpdateMarketEarningTableListener
      */
     public function handle($event)
     {
-        $uniqueInput = ['market_id'=>$event->market->id];
+        $uniqueInput = ['market_id'=>$event->newMarket->id];
         try {
             $this->earningRepository->updateOrCreate($uniqueInput);
         } catch (ValidatorException $e) {

@@ -41,9 +41,7 @@ class App
                 $appLogo = $upload->getFirstMediaUrl('app_logo');
             }
             view()->share('app_logo', $appLogo);
-        } catch (\Exception $exception) {
-            echo $exception->getMessage();
-        }
+        } catch (\Exception $exception) { }
 
         return $next($request);
     }

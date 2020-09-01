@@ -1,6 +1,6 @@
 /*
  * File name: scripts.js
- * Last modified: 2020.04.29 at 22:38:56
+ * Last modified: 2020.04.30 at 08:21:08
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -19,6 +19,13 @@ $(document).ready(function () {
     if ($('textarea').length > 0) {
         $('textarea').summernote({
             height: 200
+        });
+    }
+    if ($('.datepicker').length > 0) {
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            maxViewMode: 2,
+            todayHighlight: true
         });
     }
     if ($('select.select2').length > 0) {

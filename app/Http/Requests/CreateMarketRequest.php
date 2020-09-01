@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: CreateMarketRequest.php
- * Last modified: 2020.04.28 at 21:56:10
+ * Last modified: 2020.04.30 at 08:21:08
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -34,7 +34,7 @@ class CreateMarketRequest extends FormRequest
     {
         if (auth()->user()->hasRole('admin')) {
             return Market::$adminRules;
-        } elseif (auth()->user()->hasRole('manager')) {
+        } elseif (auth()->user()->hasAnyRole(['manager', 'client'])) {
             return Market::$managerRules;
         }
     }

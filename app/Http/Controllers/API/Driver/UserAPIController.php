@@ -1,7 +1,7 @@
 <?php
 /**
  * File name: UserAPIController.php
- * Last modified: 2020.05.26 at 15:14:55
+ * Last modified: 2020.06.07 at 07:02:57
  * Author: SmarterVision - https://codecanyon.net/user/smartervision
  * Copyright (c) 2020
  *
@@ -130,10 +130,12 @@ class UserAPIController extends Controller
             [
                 'default_tax' => '',
                 'default_currency' => '',
+                'default_currency_decimal_digits' => '',
                 'app_name' => '',
                 'currency_right' => '',
                 'enable_paypal' => '',
                 'enable_stripe' => '',
+                'enable_razorpay' => '',
                 'main_color' => '',
                 'main_dark_color' => '',
                 'second_color' => '',

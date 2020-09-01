@@ -1,4 +1,11 @@
 <?php
+/**
+ * File name: UpdateOrderEarningTable.php
+ * Last modified: 2020.05.05 at 17:03:49
+ * Author: SmarterVision - https://codecanyon.net/user/smartervision
+ * Copyright (c) 2020
+ *
+ */
 
 namespace App\Listeners;
 
@@ -25,33 +32,43 @@ class UpdateOrderEarningTable
 
     /**
      * Handle the event.
-     *
+     *oldOrder
+     * updatedOrder
      * @param object $event
      * @return void
      */
     public function handle($event)
     {
-        if ($event->order->payment->status == 'Paid') {
-            $this->earningRepository->pushCriteria(new EarningOfMarketCriteria($event->order->productOrders[0]->product->market->id));
-
+        if ($event->oldStatus != $event->updatedOrder->payment->status) {
+            $this->earningRepository->pushCriteria(new EarningOfMarketCriteria($event->updatedOrder->productOrders[0]->product->market->id));
             $market = $this->earningRepository->first();
-            // test if order delivered to client
+//            dd($market);
             $amount = 0;
-            if (empty($market)) {
-                Flash::error('Markets not found');
-            } else {
-                foreach ($event->order->productOrders as $productOrder) {
+
+            // test if order delivered to client
+            if (!empty($market)) {
+                foreach ($event->updatedOrder->productOrders as $productOrder) {
                     $amount += $productOrder['price'] * $productOrder['quantity'];
                 }
-                $market->total_orders++;
-                $market->market->admin_commission;
-                $market->total_earning += $amount;
-                $market->admin_earning += ($market->market->admin_commission / 100) * $amount;
-                $market->market_earning += ($amount - $market->admin_earning);
-                $market->delivery_fee += $event->order->delivery_fee;
-                $market->tax += ($amount+$event->order->delivery_fee) * $event->order->tax / 100;
-                $market->save();
+                if ($event->updatedOrder->payment->status == 'Paid') {
+                    $market->total_orders++;
+                    $market->total_earning += $amount;
+                    $market->admin_earning += ($market->market->admin_commission / 100) * $amount;
+                    $market->market_earning += ($amount - $market->admin_earning);
+                    $market->delivery_fee += $event->updatedOrder->delivery_fee;
+                    $market->tax += $amount * $event->updatedOrder->tax / 100;
+                    $market->save();
+                } elseif ($event->oldStatus == 'Paid') {
+                    $market->total_orders--;
+                    $market->total_earning -= $amount;
+                    $market->admin_earning -= ($market->market->admin_commission / 100) * $amount;
+                    $market->market_earning -= $amount - (($market->market->admin_commission / 100) * $amount);
+                    $market->delivery_fee -= $event->updatedOrder->delivery_fee;
+                    $market->tax -= $amount * $event->updatedOrder->tax / 100;
+                    $market->save();
+                }
             }
+
         }
     }
 }
