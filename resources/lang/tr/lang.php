@@ -1073,6 +1073,7 @@ return [
 	'requested_markets_plural' => 'Market İstekleri',
 	'requested_markets_desc' => 'Market İstekleri Açıklama',
 	'requested_markets_table' => 'Market istek tablosu',
+	 'market_active' => 'Marketi Aktif Et',
 	
 
 	
