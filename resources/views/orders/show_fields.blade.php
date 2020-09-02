@@ -9,12 +9,14 @@
     <div class="col-8">
     <p>{!! $order->user->name !!}</p>
   </div>
-
-    {!! Form::label('order_client_phone', trans('lang.order_client_phone'), ['class' => 'col-4 control-label']) !!}
+ 
+ 
+ {!! Form::label('phone', trans('lang.order_client'), ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
-    <p>{!! isset($order->user->custom_fields['phone']) ? $order->user->custom_fields['phone']['view'] : "" !!}</p>
-  </div>
-
+    <p>{!! $order->user->phone !!}</p>
+  </div>  
+  
+  
     {!! Form::label('delivery_address', trans('lang.delivery_address'), ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
     <p>{!! $order->deliveryAddress ? $order->deliveryAddress->address : '' !!}</p>
