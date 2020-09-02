@@ -11,7 +11,7 @@
   </div>
  
  
- {!! Form::label('phone', trans('lang.order_client'), ['class' => 'col-4 control-label']) !!}
+ {!! Form::label('phone', trans('lang.order_phone'), ['class' => 'col-4 control-label']) !!}
     <div class="col-8">
     <p>{!! $order->user->phone !!}</p>
   </div>  
