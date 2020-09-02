@@ -1018,7 +1018,7 @@ return [
     'order_active' => 'Aktif',
     'order_canceled' => 'İptal edildi',
     'product_unit' => 'Birim',
-    'product_unit_placeholder' => 'Ürün birimini girin (ex: m, L, ml, Kg, m²)',
+    'product_unit_placeholder' => 'Ürün birimini girin (ex: m, L, ml, Kg, m² )',
     'product_unit_help' => 'Kg',
     'product_package_items_count' => 'Paket sayısı',
     'product_package_items_count_placeholder' => '6',
