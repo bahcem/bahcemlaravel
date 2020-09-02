@@ -67,11 +67,11 @@ class LoginController extends Controller
     public function handleProviderCallback($service)
     {
         $userSocial = Socialite::driver($service)->user();
-        $user = User::where('email',$userSocial->email)->first();
+        $user = User::where('phone',$userSocial->phone)->first();
         if(!$user){
             $user = new User;
             $user->name = $userSocial->name;
-            $user->email = $userSocial->email;
+            $user->phone = $userSocial->phone;
             $user->password = bcrypt(str_random());
             $user->save();
             $defaultRoles = $this->roleRepository->findByField('default','1');
