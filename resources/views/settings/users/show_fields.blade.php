@@ -14,6 +14,14 @@
   </div>
 </div>
 
+<!-- PhoneField -->
+<div class="form-group row col-6">
+  {!! Form::label('phone', 'Phone:', ['class' => 'col-3 control-label text-right']) !!}
+  <div class="col-9">
+    <p>{!! $user->phone !!}</p>
+  </div>
+</div>
+
 <!-- Email Field -->
 <div class="form-group row col-6">
   {!! Form::label('email', 'Email:', ['class' => 'col-3 control-label text-right']) !!}
