@@ -44,7 +44,7 @@ class UserAPIController extends Controller
     {
         try {
             $this->validate($request, [
-                'email' => 'required|email',
+                'phone' => 'required',
                 'password' => 'required',
             ]);
             if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
@@ -71,12 +71,12 @@ class UserAPIController extends Controller
         try {
             $this->validate($request, [
                 'name' => 'required',
-                'email' => 'required|unique:users|email',
+                'phone' => 'required|unique:users|email',
                 'password' => 'required',
             ]);
             $user = new User;
             $user->name = $request->input('name');
-            $user->email = $request->input('email');
+            $user->phone = $request->input('phone');
             $user->device_token = $request->input('device_token', '');
             $user->password = Hash::make($request->input('password'));
             $user->api_token = str_random(60);

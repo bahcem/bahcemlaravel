@@ -38,7 +38,8 @@ class User extends Authenticatable implements HasMedia
      */
     public static $rules = [
         'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
+		'phone' => 'required|string|max:255',
+        // 'email' => 'required|string|email|max:255|unique:users',
         // 'password' => 'required',
     ];
     public $table = 'users';
@@ -49,7 +50,7 @@ class User extends Authenticatable implements HasMedia
      */
     public $fillable = [
         'name',
-        'email',
+        'phone',
         'password',
         'api_token',
         'device_token',
@@ -61,7 +62,7 @@ class User extends Authenticatable implements HasMedia
      */
     protected $casts = [
         'name' => 'string',
-        'email' => 'string',
+        'phone' => 'string',
         'password' => 'string',
         'api_token' => 'string',
         'device_token' => 'string',
