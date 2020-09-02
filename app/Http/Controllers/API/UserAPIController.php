@@ -71,7 +71,7 @@ class UserAPIController extends Controller
         try {
             $this->validate($request, [
                 'name' => 'required',
-                'phone' => 'required|unique:users|email',
+                'phone' => 'required|unique:users',
                 'password' => 'required',
             ]);
             $user = new User;
