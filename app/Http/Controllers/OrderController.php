@@ -192,9 +192,8 @@ class OrderController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-      return view('orders.edit')->with('order', $order)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("orderStatus", $orderStatus);
-    
-   }
+        return view('orders.edit')->with('order', $order)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("orderStatus", $orderStatus);
+    }
 
     /**
      * Update the specified Order in storage.
@@ -238,19 +237,19 @@ class OrderController extends Controller
             ], $order['payment_id']);
             //dd($input['status']);
 
-            event(new OrderChangedEvent($order));
+            event(new OrderChangedEvent($oldStatus, $order));
 
             foreach (getCustomFieldsValues($customFields, $request) as $value) {
                 $order->customFieldsValues()
                     ->updateOrCreate(['custom_field_id' => $value['custom_field_id']], $value);
             }
-        } catch (ValidatorException $e) { 
+        } catch (ValidatorException $e) {
             Flash::error($e->getMessage());
         }
 
         Flash::success(__('lang.updated_successfully', ['operator' => __('lang.order')]));
 
-        return redirect(route('orders.index'));
+        return redirect(route('orders.show'));
     }
 
     /**
