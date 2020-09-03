@@ -249,7 +249,7 @@ class OrderController extends Controller
 
         Flash::success(__('lang.updated_successfully', ['operator' => __('lang.order')]));
 
-        return redirect(route('orders.show'));
+        return redirect()->back();
     }
 
     /**
