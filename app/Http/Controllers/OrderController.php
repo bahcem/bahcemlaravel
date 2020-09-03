@@ -192,8 +192,9 @@ class OrderController extends Controller
             $html = generateCustomField($customFields, $customFieldsValues);
         }
 
-        return view('orders.edit')->with('order', $order)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("orderStatus", $orderStatus);
-    }
+       // return view('orders.edit')->with('order', $order)->with("customFields", isset($html) ? $html : false)->with("user", $user)->with("driver", $driver)->with("orderStatus", $orderStatus);
+       return redirect(route('orders.index'));
+   }
 
     /**
      * Update the specified Order in storage.
