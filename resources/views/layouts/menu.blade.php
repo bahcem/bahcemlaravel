@@ -6,12 +6,20 @@
     </li>
 @endcan
 
+@can('users.index')
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="{!! route('users.index') !!}">@if($icons)
+                <i class="nav-icon fa fa-group"></i>@endif<p>{{trans('lang.user')}}</p></a>
+    </li>
+@endcan
+
 @can('favorites.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('favorites*') ? 'active' : '' }}" href="{!! route('favorites.index') !!}">@if($icons)
                 <i class="nav-icon fa fa-heart"></i>@endif<p>{{trans('lang.favorite_plural')}}</p></a>
     </li>
 @endcan
+
 
 <li class="nav-header">{{trans('lang.app_management')}}</li>
 
