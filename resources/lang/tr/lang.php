@@ -1077,12 +1077,12 @@ return [
       
 	  
 	  
-	   'slide_plural' => 'Slides',
-    'slide_desc' => 'Slides Management',
-    'slide_edit' => 'Edit Slide',
-    'slide_table' => 'Slides List',
-    'slide_create' => 'Create Slide',
-    'slide_order' => 'Order',
+	   'slide_plural' => 'Slaytlar',
+    'slide_desc' => 'Slayt Yönetimi ',
+    'slide_edit' => 'Slaytı Düzenle',
+    'slide_table' => 'Slayt Listesi',
+    'slide_create' => 'Slayt Oluştur',
+    'slide_order' => 'Sıra',
     'slide_order_help' => 'Insert Order',
     'slide_order_placeholder' => 'Insert Order',
     'slide_text' => 'Text',
