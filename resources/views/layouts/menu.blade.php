@@ -13,6 +13,13 @@
     </li>
 @endcan
 
+@can('slides.index')
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('slides*') ? 'active' : '' }}" href="{!! route('slides.index') !!}">@if($icons)
+                <i class="nav-icon fa fa-magic"></i>@endif<p>{{trans('lang.slide_plural')}}</p></a>
+    </li>
+@endcan
+
 @can('favorites.index')
     <li class="nav-item">
         <a class="nav-link {{ Request::is('favorites*') ? 'active' : '' }}" href="{!! route('favorites.index') !!}">@if($icons)
