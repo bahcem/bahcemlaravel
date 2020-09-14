@@ -137,6 +137,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a href="{!! url('settings/mobile/home') !!}" class="nav-link {{  Request::is('settings/mobile/home*') ? 'selected' : '' }}">
+                    <i class="fa fa-home"></i> {{trans('lang.mobile_home')}}
+                </a>
+            </li>
+
         </ul>
     </div>
 </div>

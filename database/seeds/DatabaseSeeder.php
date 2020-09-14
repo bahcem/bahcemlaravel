@@ -16,12 +16,9 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-
     public function run()
     {
-        $this->call(CreateMarketPermission::class);
-        $this->call(RequestedMarketsPermission::class);
         $this->call(CouponPermission::class);
+        $this->call(SlidesSeeder::class);
     }
-
 }

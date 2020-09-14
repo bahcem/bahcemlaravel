@@ -15,6 +15,7 @@ use App\Criteria\Orders\OrdersOfUserCriteria;
 use App\Events\OrderChangedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Notifications\AssignedOrder;
 use App\Notifications\NewOrder;
 use App\Notifications\StatusChangedOrder;
 use App\Repositories\CartRepository;
@@ -23,7 +24,6 @@ use App\Repositories\OrderRepository;
 use App\Repositories\PaymentRepository;
 use App\Repositories\ProductOrderRepository;
 use App\Repositories\UserRepository;
-use Braintree\Gateway;
 use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -272,6 +272,13 @@ class OrderAPIController extends Controller
             if (setting('enable_notifications', false)) {
                 if (isset($input['order_status_id']) && $input['order_status_id'] != $oldOrder->order_status_id) {
                     Notification::send([$order->user], new StatusChangedOrder($order));
+                }
+
+                if (isset($input['driver_id']) && ($input['driver_id'] != $oldOrder['driver_id'])) {
+                    $driver = $this->userRepository->findWithoutFail($input['driver_id']);
+                    if (!empty($driver)) {
+                        Notification::send([$driver], new AssignedOrder($order));
+                    }
                 }
             }
 
