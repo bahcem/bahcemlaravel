@@ -1156,6 +1156,9 @@ return [
     'app_setting_mobile_popular' => 'Popular markets grid',
     'app_setting_mobile_recent_reviews_heading' => 'Recent reviews heading',
     'app_setting_mobile_recent_reviews' => 'Recent reviews list',
+	 'app_setting_become_store_owner' => 'Market Başvurusu Yap',
+	
+	
 	
 
 	
