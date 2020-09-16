@@ -1157,9 +1157,9 @@ return [
     'app_setting_mobile_recent_reviews_heading' => 'Recent reviews heading',
     'app_setting_mobile_recent_reviews' => 'Recent reviews list',
 	 'app_setting_become_store_owner' => 'Market Başvurusu Yap',
-	 'market_min.tutar' => 'Minumum tutar',
-	 'market_min.tutar_help' => 'Minumum tutar girin',
-	 'market_min.tutar_placeholder' => 'Minumum tutar ekleyin',
+	 'market_min_tutar' => 'Minumum tutar',
+	 'market_min_tutar_help' => 'Minumum tutar girin',
+	 'market_min_tutar_placeholder' => 'Minumum tutar ekleyin',
 	 
 	
 	
