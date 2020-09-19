@@ -23,7 +23,7 @@ class CreateSlidesTable extends Migration
         Schema::create('slides', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order')->unsigned()->default(0)->nullable();
-            $table->string('text', 50)->nullable();
+            $table->string('text', 150)->nullable();
             $table->string('button', 50)->nullable();
             $table->string('text_position', 50)->default('start')->nullable();
             $table->string('text_color', 36)->nullable();
