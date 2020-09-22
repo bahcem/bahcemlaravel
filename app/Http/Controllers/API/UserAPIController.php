@@ -73,7 +73,7 @@ class UserAPIController extends Controller
                 'name' => 'required',
                 'email' => 'required|unique:users|email',
                 'password' => 'required',
-				 'phone' => 'required|unique:users|phone',
+				'phone' => 'required',
             ]);
             $user = new User;
             $user->name = $request->input('name');
