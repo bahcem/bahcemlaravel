@@ -12,7 +12,7 @@ class App
      *
      * @array $languages
      */
-    protected $languages = ['en', 'fr']; // en, fr
+    protected $languages = ['en', 'tr']; // en, fr
 
     protected $uploadRepository;
 
