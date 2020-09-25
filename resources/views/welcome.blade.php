@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +18,16 @@
 <!-- Google Font: Poppins -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,700" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+	
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  window.OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "7fa695cb-80ec-4b48-996c-8c7fd88b4065",
+    });
+  });
+</script>
 </head>
 <body class="hold-transition">
 
