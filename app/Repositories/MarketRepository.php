@@ -27,7 +27,6 @@ class MarketRepository extends BaseRepository implements CacheableInterface
         'name',
         'description',
         'address',
-		'extra_address',
         'latitude',
         'longitude',
         'phone',
